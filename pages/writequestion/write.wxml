@@ -1,0 +1,7 @@
+<!--pages/writequestion/write.wxml-->
+<view class="section">
+  <form bindsubmit="bindFormSubmit">
+    <textarea placeholder="在此输入你的问题" name="textarea"/>
+    <button form-type="submit"> 提问 </button>
+  </form>
+</view>

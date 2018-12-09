@@ -1,0 +1,55 @@
+<!--pages/user/user.wxml-->
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+    <navigator>我关注的问题</navigator>
+    <list>woe</list>
+  </view>
+</view> -->
+
+<view class="mine-wrapper">
+  <view class="avatar-wrapper">
+    <view>
+      <view class="avatar">
+        <image style="border-radius:50%;" src="{{userinfo.avatarUrl ? userinfo.avatarUrl:'../../images/avatar/avatar_01.png'}}"></image>
+      </view>
+      <view class="text">
+        <text wx:if="{{userinfo.nickName}}">{{userinfo.nickName}}</text>
+        <text wx:else bindtap="toLogin">注册 / 登录</text>
+      </view>
+      <view class="text">
+        <text wx:if="{{userSign==2}}">{{"您还没有填写真实信息，暂不能借书"}}</text>
+        <text wx:elif="{{userSign==1}}">{{"会员用户"}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="list-wrapper">
+    <view class="weui-cells weui-cells_after-title">
+       <view class="person-blank"></view>
+      <block wx:for="{{menuitems}}" wx:key="menu_for">
+        <!-- <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">
+            <image src="{{item.icon}}"></image>
+          </view>
+          <view class="weui-cell__bd">{{item.text}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{item.tips}}</view>
+         </navigator> -->
+         <navigator url="{{item.url}}" class="list-item">
+            <image class="item-image" src="{{item.icon}}"></image>
+            <text class="item-text">{{item.text}}</text>
+         </navigator>
+          <view class="person-line"></view>
+
+
+      </block>
+    </view>
+  </view>
+</view>
+
