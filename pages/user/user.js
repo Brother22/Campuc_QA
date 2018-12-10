@@ -66,7 +66,7 @@ Page({
   },
 
   onGotUserInfo: function(){
-    
+  
   },
 
   /**
@@ -75,11 +75,10 @@ Page({
   onLoad: function (options) {
     let that = this
     _app.getUserInfo(function (userinfo) {
-      console.log(userinfo)
-      console.log(getApp().globalData.userSign)
+      // console.log(userinfo)
+      // console.log(getApp().globalData.userSign)
       that.setData({
         userinfo: userinfo,
-        userSign: getApp().globalData.userSign,
       })
     })
   },
@@ -94,15 +93,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let that = this
-    _app.getUserInfo(function (userinfo) {
-      console.log(userinfo)
-      console.log(getApp().globalData.userSign)
-      that.setData({
-        userinfo: userinfo,
-        userSign: getApp().globalData.userSign,
-      })
-    })
+
   },
 
   /**
