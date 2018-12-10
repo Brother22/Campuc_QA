@@ -3,6 +3,7 @@
 //获取应用实例
 var app = getApp()
 var utils = require('../../utils/util.js')
+
 Page({
   data: {
     list: [],
@@ -24,19 +25,22 @@ Page({
     var date = this.getNextDate()
     var that = this
     that.setData({ loading: true })
-    wx.request({
-      url: 'http://news.at.zhihu.com/api/4/news/before/' + (Number(utils.formatDate(date)) + 1),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success(res) {
-        that.setData({
-          loading: false,
-          list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
-        })
-      }
-    })
+    // wx.request({
+    //   url: 'http://news.at.zhihu.com/api/4/news/before/' + (Number(utils.formatDate(date)) + 1),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   success(res) {
+    //     that.setData({
+    //       loading: false,
+    //       list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
+    //     })
+    //   }
+    // })
   },
+
+
+
   getNextDate() {
     const now = new Date()
     now.setDate(now.getDate() - this.index++)
@@ -44,16 +48,26 @@ Page({
   },
   onLoad() {
     let that = this
-    wx.request({
-      url: 'http://news-at.zhihu.com/api/4/news/latest',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success(res) {
-        that.setData({
-          banner: res.data.top_stories,
-          list: [{ header: '今日问答' }].concat(res.data.stories)
-        })
+    // wx.request({
+    //   url: 'http://news-at.zhihu.com/api/4/news/latest',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   success(res) {
+    //     that.setData({
+    //       banner: res.data.top_stories,
+    //       list: [{ header: '今日问答' }].concat(res.data.stories)
+    //     })
+    //   }
+    // })
+    const db = wx.cloud.database()
+    db.collection('question2').get({
+      success(res){
+         console.log(res)
+       that.setData({
+        //  banner: res.data.top_stories,
+         list: { header: '今日问答', data: res.data}
+       })
       }
     })
     this.index = 1

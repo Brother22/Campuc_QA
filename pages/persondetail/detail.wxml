@@ -1,0 +1,27 @@
+<!--detail.wxml-->
+<view class="container">
+    <view class="art-header">
+        <!-- <image src="{{art.image}}" class="art-img"/> -->
+        <view class="art-title">{{art.name}}</view>
+        <view class="art-source">{{art.age}}</view>
+        <view class="art-source">{{art.sex}}</view>
+    </view>
+    <view class="art-content">
+      {{art.content}}
+    </view> 
+    <!-- <text class="sub-title">他的回答</text>   缺css -->
+    <block wx:for="{{artq}}" wx:for-index="id">
+       <!-- <text wx:if="{{item.header}}" class="sub-title">我的回答</text>  -->
+          <navigator url="../answerdetail/detail?id={{item.id}}"> 
+        <view class="news-item" >
+          <view class="news-item-left">
+            <text class="news-item-title">{{item.title}}</text>
+          </view>
+          <!-- <view class="news-item-right">
+            <image src="{{item.images[0]}}" class="news-image"/>
+          </view> -->
+        </view>
+      </navigator>
+    </block>
+
+</view>

@@ -9,7 +9,9 @@
     "pages/myanswer/myanswer",
     "pages/myloveqa/myloveqa",
     "pages/myloveperson/myloveperson",
-    "pages/writesucc/writesucc"
+    "pages/writesucc/writesucc",
+    "pages/answerdetail/detail",
+    "pages/persondetail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

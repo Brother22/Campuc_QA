@@ -44,18 +44,29 @@ Page({
   },
   onLoad() {
     let that = this
-    wx.request({
-      url: 'http://news-at.zhihu.com/api/4/news/latest',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    // wx.request({
+    //   url: 'http://news-at.zhihu.com/api/4/news/latest',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   success(res) {
+    //     that.setData({
+    //       banner: res.data.top_stories,
+    //       list: [{ header: '今日问答' }].concat(res.data.stories)
+    //     })
+    //   }
+    // })
+    const db = wx.cloud.database()
+    db.collection('myloveperson').get({
       success(res) {
+        console.log(res)
         that.setData({
-          banner: res.data.top_stories,
-          list: [{ header: '今日问答' }].concat(res.data.stories)
+          //  banner: res.data.top_stories,
+          list: res.data
         })
       }
     })
+
     this.index = 1
 
   }
