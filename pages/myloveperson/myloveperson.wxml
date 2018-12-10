@@ -3,7 +3,7 @@
    <text class="sub-title">我的关注</text>
     <block wx:for="{{list}}" wx:for-index="id">
        <!-- <text wx:if="{{item.header}}" class="sub-title">我的回答</text>  -->
-          <navigator url="../persondetail/detail?id={{item.uid}}"> 
+          <navigator url="../persondetail/detail?id={{item.fuid}}"> 
         <view class="news-item" >
           <view class="news-item-left">
             <text class="news-item-title">{{item.name}}</text>

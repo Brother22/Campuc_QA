@@ -57,9 +57,9 @@ Page({
     //   }
     // })
     const db = wx.cloud.database()
-    db.collection('answer_brief').get({
+    db.collection('answer_brief').where({ uid: app.globalData.id}).get({
       success(res) {
-        //  console.log(res)
+          console.log(res.data)
         that.setData({
           //  banner: res.data.top_stories,
           list:res.data 

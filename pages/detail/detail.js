@@ -17,7 +17,7 @@ Page({
       //   'Content-Type': 'application/json'
       // }
     // Number Id = Number(options.id)
-    db.collection('qdetail').where({ id:Number(options.id)}).get({
+    db.collection('qdetail').where({uid:options.id}).get({
         success:function(res) {
           // console.log(1111)
            console.log(res.data)

@@ -12,24 +12,25 @@ Page({
   onLoad(options) {
     var that = this
     const db = wx.cloud.database()
-    // console.log("123"+options.id)
-    db.collection('user').where({ id: Number(options.id) }).get({
+    // console.log(options.id)
+    db.collection('answer_brief').where({ uid:options.id}).get({
       success: function (res) {
-         console.log(res.data)
+        // console.log(11111)
+          console.log(res.data)
         that.setData({
           art: res.data[0]
         })
       }
     })
 
-    db.collection('answer').where({ uid: Number(options.id) }).get({
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          artq: res.data
-        })
-      }
-    })
+    // db.collection('answer').where({ uid: Number(options.id) }).get({
+    //   success: function (res) {
+    //     console.log(res.data)
+    //     that.setData({
+    //       artq: res.data
+    //     })
+    //   }
+    // })
 
 
 

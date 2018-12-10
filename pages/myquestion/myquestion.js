@@ -1,7 +1,7 @@
 // pages/myquestion/myquestion.js
 //index.js
 //获取应用实例
-var app = getApp()
+const app = getApp()
 var utils = require('../../utils/util.js')
 
 Page({
@@ -12,7 +12,8 @@ Page({
     autoplay: true,
     interval: 3000,
     loading: false,
-    plain: false
+    plain: false,
+    id:''
   },
   //事件处理函数
   bindViewTap(e) {
@@ -60,8 +61,13 @@ Page({
     //     })
     //   }
     // })
+    
+    // id: app.globalData.id
+    // console.log(1111)
+     console.log(app.globalData.id)
+    // console.log(1111)
     const db = wx.cloud.database()
-    db.collection('question2').get({
+    db.collection('question2').where({ uid:app.globalData.id}).get({
       success(res){
          console.log(res)
        that.setData({

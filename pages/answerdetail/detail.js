@@ -12,7 +12,7 @@ Page({
     var that = this
     const db = wx.cloud.database()
     // console.log("123"+options.id)
-    db.collection('answer').where({ id: Number(options.id) }).get({
+    db.collection('answer').where({ uid: options.id }).get({
       success: function (res) {
         // console.log(res.data)
         that.setData({

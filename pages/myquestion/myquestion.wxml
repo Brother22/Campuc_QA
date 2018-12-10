@@ -12,7 +12,7 @@
         <image src="{{item.images[0]}}" class="news-image" />
       </view>
     </view> -->
-    <navigator url="../detail/detail?id={{item.id}}"> 
+    <navigator url="../detail/detail?id={{item.uid}}"> 
         <view class="news-item" >
           <view class="news-item-left">
             <text class="news-item-title">{{item.title}}</text>
@@ -23,5 +23,5 @@
         </view>
       </navigator>
   </block>
-  <button type="primary" class="load-btn" loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button>
+  <!-- <button type="primary" class="load-btn" loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button> -->
 </view>

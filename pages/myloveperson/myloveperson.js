@@ -57,7 +57,7 @@ Page({
     //   }
     // })
     const db = wx.cloud.database()
-    db.collection('myloveperson').get({
+    db.collection('myloveperson').where({uid:app.globalData.id}).get({
       success(res) {
         console.log(res)
         that.setData({

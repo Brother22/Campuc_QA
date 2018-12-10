@@ -1,11 +1,34 @@
 <!--detail.wxml-->
 <view class="container">
-    <view class="art-header">
-        <!-- <image src="{{art.image}}" class="art-img"/> -->
-        <view class="art-title">{{art.name}}</view>
+    <!-- <view class="art-header">
+         <image src="{{art.image}}" class="art-img"/> 
+        <view class="art-title">{{art.title}}</view>
         <view class="art-source">{{art.age}}</view>
         <view class="art-source">{{art.sex}}</view>
-    </view>
+    </view> -->
+      <block wx:for="{{art}}" wx:for-index="id">
+    <!--  wx:if="{{item.header}}" -->
+
+    <!-- <view class="news-item">
+      <view class="news-item-left">
+        <text class="news-item-title">{{item.title}}</text>
+      </view>
+      <view class="news-item-right">
+        <image src="{{item.images[0]}}" class="news-image" />
+      </view>
+    </view> -->
+    <!-- Css没陪 -->
+    <!-- <navigator url="../detail/detail?id={{item.qid}}">  -->
+        <view class="news-item" >
+          <view class="news-item-left">
+            <text class="news-item-title">{{item.title}}</text>
+          </view>
+          <!-- <view class="news-item-right">
+            <image src="{{item.images[0]}}" class="news-image"/>
+          </view> -->
+        </view>
+      <!-- </navigator> -->
+  </block>
     <view class="art-content">
       {{art.content}}
     </view> 

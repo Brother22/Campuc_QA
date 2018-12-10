@@ -57,13 +57,28 @@ Page({
     //   }
     // })
     const db = wx.cloud.database()
-    db.collection('mylovequestion').get({
+    console.log(111)
+    db.collection('mylovequetion').where({ uid: app.globalData.id}).get({
       success(res) {
-        console.log(res)
-        that.setData({
-          //  banner: res.data.top_stories,
-          list: res.data
-        })
+        // console.log(res.data)      
+        var a = new Array()  
+        var i = 0    
+            // console.log(i)
+          // console.log(res.data[i].qid)
+        var len = res.data.length
+          while(i < res.data.length){
+          db.collection('question2').where({qid:res.data[i].qid}).get({
+            success(res){
+              // console.log(res.data[0])
+              a.push(res.data[0])
+              if (i == len || i == len-1) {
+                that.setData({
+                  list:a
+                })}
+            }  
+          })
+            i++
+          }   
       }
     })
     this.index = 1
