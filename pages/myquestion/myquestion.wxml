@@ -1,7 +1,7 @@
 <!--pages/myquestion/myquestion.wxml-->
 <view class="news-item-container">
   <text class="sub-title">我的提问</text>
-  <block wx:for="{{list}}" wx:for-index="id">
+  <block wx:for="{{list.data}}" wx:for-index="id">
     <!--  wx:if="{{item.header}}" -->
 
     <!-- <view class="news-item">
