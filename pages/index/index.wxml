@@ -1,6 +1,6 @@
 <!--index.wxml-->
-<view class="container">
-  <swiper indicator-dots="{{indicatorDots}}"
+<!-- <view class="container"> -->
+  <!-- <swiper indicator-dots="{{indicatorDots}}"
   autoplay="{{autoplay}}" class="banners" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{banner}}">
       <swiper-item class="banner" >
@@ -8,7 +8,7 @@
           <text class="banner-title">{{item.title}}</text>
       </swiper-item>
     </block>
-  </swiper>
+  </swiper> -->
   <view class="news-item-container">
     <block wx:for="{{list}}" wx:for-index="id">
       <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text>
@@ -26,4 +26,4 @@
     <button type="primary" class="load-btn"  loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button>
   </view>
   
-</view>
+<!-- </view> -->

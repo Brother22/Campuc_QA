@@ -1,3 +1,4 @@
+// pages/myloveqa/myloveqa.js
 //index.js
 //获取应用实例
 var app = getApp()
@@ -18,7 +19,7 @@ Page({
       url: '../detail/detail?id=' + e.target.dataset.id
     })
   },
-  loadMore (e) {
+  loadMore(e) {
     if (this.data.list.length === 0) return
     var date = this.getNextDate()
     var that = this
@@ -28,34 +29,34 @@ Page({
       headers: {
         'Content-Type': 'application/json'
       },
-      success (res) {
-         that.setData({
-           loading: false,
-           list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
-         })
+      success(res) {
+        that.setData({
+          loading: false,
+          list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
+        })
       }
     })
   },
-  getNextDate (){
+  getNextDate() {
     const now = new Date()
     now.setDate(now.getDate() - this.index++)
     return now
   },
-  onLoad () {
+  onLoad() {
     let that = this
     wx.request({
       url: 'http://news-at.zhihu.com/api/4/news/latest',
       headers: {
         'Content-Type': 'application/json'
       },
-      success (res) {
-         that.setData({
-           banner: res.data.top_stories,
-           list: [{ header: '今日问答' }].concat(res.data.stories)
-         })
+      success(res) {
+        that.setData({
+          banner: res.data.top_stories,
+          list: [{ header: '今日问答' }].concat(res.data.stories)
+        })
       }
     })
     this.index = 1
-    
+
   }
 })

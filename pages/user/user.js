@@ -58,10 +58,10 @@ Page({
    */
   data: {
     menuitems: [
-      { text: '我的提问', url: '../borrowbook/borrowbook?status=N', icon: '../../images/myquestion.png', tips: '' },
-      { text: '我的回答', url: '../borrowbook/borrowbook?status=F', icon: '../../images/myanswer.png', tips: '' },
-      { text: '关注的问题', url: '../userinfo/userinfo', icon: '../../images/myloveqa.png', tips: '' },
-      { text: '关注的答主', url: '../borrowbook/borrowbook?status=Y', icon: '../../images/myloveperson.png', tips: '' },
+      { text: '我的提问', url: '../myquestion/myquestion?status=N', icon: '../../images/myquestion.png', tips: '' },
+      { text: '我的回答', url: '../myanswer/myanswer?status=F', icon: '../../images/myanswer.png', tips: '' },
+      { text: '关注的问题', url: '../myloveqa/myloveqa', icon: '../../images/myloveqa.png', tips: '' },
+      { text: '关注的答主', url: '../myloveperson/myloveperson', icon: '../../images/myloveperson.png', tips: '' },
     ]
   },
   /**
