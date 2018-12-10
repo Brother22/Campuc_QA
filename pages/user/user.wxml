@@ -20,7 +20,7 @@
       </view>
       <view class="text">
         <text wx:if="{{userinfo.nickName}}">{{userinfo.nickName}}</text>
-        <text wx:else bindtap="toLogin">注册 / 登录</text>
+        <button style='width:36%;background: #1b82d1;color: #fff;border:0' wx:else open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">登录</button>
       </view>
     </view>
   </view>
@@ -33,8 +33,6 @@
             <text class="item-text">{{item.text}}</text>
          </navigator>
           <view class="person-line"></view>
-
-
       </block>
     </view>
   </view>

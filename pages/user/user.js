@@ -64,17 +64,21 @@ Page({
       { text: '关注的答主', url: '../myloveperson/myloveperson', icon: '../../images/myloveperson.png', tips: '' },
     ]
   },
+
+  onGotUserInfo: function(){
+  
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this
     _app.getUserInfo(function (userinfo) {
-      console.log(userinfo)
-      console.log(getApp().globalData.userSign)
+      // console.log(userinfo)
+      // console.log(getApp().globalData.userSign)
       that.setData({
         userinfo: userinfo,
-        userSign: getApp().globalData.userSign,
       })
     })
   },
@@ -89,15 +93,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let that = this
-    _app.getUserInfo(function (userinfo) {
-      console.log(userinfo)
-      console.log(getApp().globalData.userSign)
-      that.setData({
-        userinfo: userinfo,
-        userSign: getApp().globalData.userSign,
-      })
-    })
+
   },
 
   /**
