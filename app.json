@@ -4,7 +4,11 @@
     "pages/detail/detail",
     "pages/list/list",
     "pages/user/user",
-    "pages/writequestion/write"
+    "pages/writequestion/write",
+    "pages/myquestion/myquestion",
+    "pages/myanswer/myanswer",
+    "pages/myloveqa/myloveqa",
+    "pages/myloveperson/myloveperson"
   ],
   "window": {
     "backgroundTextStyle": "light",
