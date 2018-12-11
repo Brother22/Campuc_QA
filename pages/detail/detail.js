@@ -2,12 +2,21 @@ const app = getApp()
 Page({
   data: {
     art: {},
+    list:{},
   },
   onReady () {
     wx.setNavigationBarTitle({
       title: '详情页面'
     })
   },
+
+  answerquetsion:function(){
+    console.log(this.data.art.qid)
+    wx.navigateTo({
+      url: '../answer/answer?qid='+this.data.art.qid
+    })
+  },
+
   onLoad (options) {
     var that = this
     const db = wx.cloud.database()
@@ -17,10 +26,10 @@ Page({
       //   'Content-Type': 'application/json'
       // }
     // Number Id = Number(options.id)
-    db.collection('qdetail').where({uid:options.id}).get({
+    db.collection('qdetail').where({qid:options.id}).get({
         success:function(res) {
           // console.log(1111)
-           console.log(res.data)
+          //  console.log(res.data)
           // console.log({ header: '今日问答', data: res.data[0].stories })
           that.setData({
             //  banner: res.data.top_stories,
@@ -32,7 +41,23 @@ Page({
         // fail(err){
         //   console.log(22222)
         // }
-      })
+      }),
+    db.collection('answer_brief').where({ qid: options.id }).get({
+      success: function (res) {
+        // console.log(1111)
+        // console.log(res.data)
+        that.setData({
+          list: res.data[0]
+        })
+        // console.log(art)
+      },
+      fail(res){
+        console.log(res)
+      }
+      // fail(err){
+      //   console.log(22222)
+      // }
+    })
   }
       // success (res) {
       //   if (res.data.body) {

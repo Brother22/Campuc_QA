@@ -18,7 +18,7 @@ Page({
         // console.log(11111)
           console.log(res.data)
         that.setData({
-          art: res.data[0]
+          art: res.data
         })
       }
     })

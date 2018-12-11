@@ -9,17 +9,26 @@ Page({
   },
   onLoad: function (options) {
     var that = this
-    this.title = options.title
-    wx.request({
-      url: 'http://news-at.zhihu.com/api/4/theme/' + options.id,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    // this.title = options.title
+    // wx.request({
+    //   url: 'http://news-at.zhihu.com/api/4/theme/' + options.id,
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //      that.setData({
+    //        list: res.data.stories
+    //      })
+    //      console.log(res.data)
+    //   }
+    // })
+
+    const db = wx.cloud.database()
+    db.collection('question2').get({
       success: function (res) {
-         that.setData({
-           list: res.data.stories
-         })
-         console.log(res.data)
+           that.setData({
+           list: res.data
+          })
       }
     })
   }

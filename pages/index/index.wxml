@@ -10,9 +10,10 @@
     </block>
   </swiper> -->
   <view class="news-item-container">
+  <text class="sub-title">今日问答</text>
     <block wx:for="{{list}}" wx:for-index="id">
-      <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text>
-      <navigator wx:else url="../detail/detail?id={{item.id}}">
+      <!-- <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text> -->  
+      <navigator  url="../detail/detail?id={{item.qid}}">
         <view class="news-item" >
           <view class="news-item-left">
             <text class="news-item-title">{{item.title}}</text>

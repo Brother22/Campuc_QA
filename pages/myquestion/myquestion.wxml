@@ -12,7 +12,7 @@
         <image src="{{item.images[0]}}" class="news-image" />
       </view>
     </view> -->
-    <navigator url="../detail/detail?id={{item.uid}}"> 
+    <navigator url="../detail/detail?id={{item._id}}"> 
         <view class="news-item" >
           <view class="news-item-left">
             <text class="news-item-title">{{item.title}}</text>

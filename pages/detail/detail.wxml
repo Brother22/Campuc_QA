@@ -1,11 +1,14 @@
 <!--detail.wxml-->
 <view class="container">
     <view class="art-header">
-        <!-- <image src="{{art.image}}" class="art-img"/> -->
-        <view class="art-title">{{art.id}}</view>
+        <view class="art-title">{{art.uid}}</view>
         <view class="art-source">{{art.content}}</view>
     </view>
     <view class="art-content">
       {{art.content}}
     </view> 
+</view>
+
+<view>
+    <button type="primary" class="load-btn"  bindtap="answerquetsion"> 回答 </button>
 </view>

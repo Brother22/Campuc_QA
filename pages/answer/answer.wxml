@@ -1,0 +1,11 @@
+<!--detail.wxml回答问题页-->
+<view class="section">
+  <form bindsubmit="bindFormSubmit">
+    <textarea placeholder="标题" name="textarea1"/>
+    <textarea placeholder="答案" name="textarea2"/>
+    <button form-type="submit"> 提交 </button>
+  </form>
+    <!-- <form bindsubmit="bindFormSubmit2">
+    <button form-type="submit"> test </button>
+  </form> -->
+</view>
