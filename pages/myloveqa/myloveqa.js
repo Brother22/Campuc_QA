@@ -64,12 +64,12 @@ Page({
         var a = new Array()  
         var i = 0    
             // console.log(i)
-          // console.log(res.data[i].qid)
+          // console.log(res.data[0].qid)
         var len = res.data.length
           while(i < res.data.length){
-          db.collection('question2').where({qid:res.data[i].qid}).get({
+          db.collection('question2').where({_id:res.data[i].qid}).get({
             success(res){
-              // console.log(res.data[0])
+              console.log(res.data[0])
               a.push(res.data[0])
               if (i == len || i == len-1) {
                 that.setData({

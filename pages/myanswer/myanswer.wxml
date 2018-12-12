@@ -1,6 +1,6 @@
 <!--pages/myanswer/myanswer.wxml-->
 <view class="news-item-container">
-<text class="sub-title">我的回答</text>
+<text class="sub-title">我的动态</text>
     <block wx:for="{{list}}" wx:for-index="id">
        <!-- <text wx:if="{{item.header}}" class="sub-title">我的回答</text>  -->
           <navigator url="../answerdetail/detail?id={{item._id}}"> 

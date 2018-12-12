@@ -1,0 +1,27 @@
+<!--pages/myquestion/myquestion.wxml-->
+<view class="news-item-container">
+  <text class="sub-title">我的动态</text>
+  <block wx:for="{{list}}" wx:for-index="id">
+    <!--  wx:if="{{item.header}}" -->
+
+    <view class="news-item">
+      <view class="news-item-left">
+        <text class="news-item-title">{{item.content}}</text>
+      </view>
+      <view class="news-item-right">
+        <image src="{{item.images[0]}}" class="news-image" />
+      </view>
+    </view>
+    <!-- <navigator url="../detail/detail?id={{item._id}}">  -->
+        <!-- <view class="news-item" >
+          <view class="news-item-left">
+            <text class="news-item-title">{{item.content}}</text>
+          </view> -->
+          <!-- <view class="news-item-right">
+            <image src="{{item.images[0]}}" class="news-image"/>
+          </view> -->
+        <!-- </view> -->
+      <!-- </navigator> -->
+  </block>
+  <!-- <button type="primary" class="load-btn" loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button> -->
+</view>

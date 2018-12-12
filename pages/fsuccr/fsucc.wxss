@@ -1,0 +1,9 @@
+/* pages/writesucc/writesucc.wxss */
+.group {
+  margin: 260rpx;
+  text-align: center;
+}
+.text {
+  margin: 20rpx;
+  text-align: center;
+}/* pages/fsuccr/fsucc.wxss */

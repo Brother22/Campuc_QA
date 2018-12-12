@@ -84,6 +84,9 @@ Page({
               },
               success(res) {
                 console.log(33333)
+                wx.navigateTo({
+                  url: '../writesucc/writesucc'
+                })
               }
             })
           }

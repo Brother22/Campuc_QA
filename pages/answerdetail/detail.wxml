@@ -1,11 +1,18 @@
 <!--detail.wxml-->
 <view class="container">
-    <view class="art-header">
-        <!-- <image src="{{art.image}}" class="art-img"/> -->
+    <!-- <view class="art-header">
         <view class="art-title">{{art.id}}</view>
         <view class="art-source">{{art.content}}</view>
-    </view>
+    </view> -->
     <view class="art-content">
+    <text class="sub-title">回答</text>
       {{art.content}}
+     <text class="sub-title">答主</text>
+       {{author.name}}
+       {{author.country}}
+       {{author.province}}
+      {{author.city}}
     </view> 
+     <button type="primary" class="load-btn"  bindtap="fanswer"> 关注答主 </button>
+     <button type="primary" class="load-btn"  bindtap="fcomment"> 查看评论 </button>
 </view>

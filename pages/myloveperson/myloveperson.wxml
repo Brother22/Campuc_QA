@@ -3,14 +3,15 @@
    <text class="sub-title">我的关注</text>
     <block wx:for="{{list}}" wx:for-index="id">
        <!-- <text wx:if="{{item.header}}" class="sub-title">我的回答</text>  -->
-          <navigator url="../persondetail/detail?id={{item.fuid}}"> 
+          <navigator url="../persondetail/detail?id={{item.uid}}"> 
         <view class="news-item" >
           <view class="news-item-left">
             <text class="news-item-title">{{item.name}}</text>
+            <text class="news-item-title">{{item.city}}</text>
           </view>
-          <!-- <view class="news-item-right">
-            <image src="{{item.images[0]}}" class="news-image"/>
-          </view> -->
+          <view class="news-item-right">
+            <image src="{{item.image}}" class="news-image"/>
+          </view>
         </view>
       </navigator>
     </block>

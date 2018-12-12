@@ -9,11 +9,16 @@
     "pages/myanswer/myanswer",
     "pages/myloveqa/myloveqa",
     "pages/myloveperson/myloveperson",
+    "pages/mynews/mynews",
     "pages/writesucc/writesucc",
     "pages/answerdetail/detail",
     "pages/persondetail/detail",
     "pages/answerbrief/brief",
-    "pages/answer/answer"
+    "pages/answer/answer",
+    "pages/fsucc/fsucc",
+    "pages/comment/comment",
+    "pages/addcomment/addcomment",
+    "pages/fsuccr/fsucc"
   ],
   "window": {
     "backgroundTextStyle": "light",

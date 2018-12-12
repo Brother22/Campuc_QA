@@ -46,10 +46,10 @@ Page({
     var that = this
     const db = wx.cloud.database()
     // console.log("123"+options.id)
-    // console.log(options)
+    console.log(options.qid)
     db.collection('qdetail').where({ qid: options.qid }).get({
       success: function (res) {
-        // console.log(res.data[0])
+         console.log(res.data[0])
         that.setData({
           art: res.data[0]
         })

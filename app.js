@@ -6,7 +6,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    console.log("123")
+    // console.log("123")
     wx.cloud.init()
   },
   getUserInfo:function(cb){
@@ -17,19 +17,20 @@ App({
       //调用登录接口
       wx.login({
         success: function (res) {
+          console.log(res),
           that.globalData.Code = res.code
           wx.getUserInfo({
             success: function (res) {
               that.globalData.userInfo = res.userInfo
               // that.globalData.id = res.userInfo._openid
               const db = wx.cloud.database()
-              db.collection('user').add({
-                // data 字段表示需新增的 JSON 数据
-                data: res.userInfo,
+          
+              // db.collection('user').add({
+              //   // data 字段表示需新增的 JSON 数据
+              //   data: res.userInfo,
                 
-                success: function (res) {
-                  // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-                  // console.log(res)
+              //   success: function (res) {
+                  // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id                
                   var l = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + 'wxaa3098e73a66c15b' + '&secret=' + 'bb7061157ae084e80e90e8830f7b9a95' + '&js_code=' + that.globalData.Code + '&grant_type=authorization_code'
                   wx.request({
                     url: l,
@@ -44,11 +45,24 @@ App({
                       // wx.setStorageSync('user', obj);//存储openid 
                       that.globalData.id = res.data.openid
                       // console.log(234555555555)
-                      // console.log(res.data.openid)
+                      console.log(res.data.openid)
+
+                      db.collection('user').where({_openid:res.data.openid}).get({
+                        success(res){
+                          if(res.data.length === 0){
+                            db.collection('user').add({ data: that.globalData.userInfo})
+                          }
+                     else {        
+                            if (res.data[0].nickname === that.globalData.userInfo.nickname && res.data[0].avatarUrl === that.globalData.userInfo.avatarUrl && res.data[0].city === that.globalData.userInfo.city && res.data[0].provice ===     that.globalData.userInfo.provice && res.data[0].country === that.globalData.userInfo.country)
+                             {}
+                            else { db.collection('user').update({ data: that.globalData.userInfo})}
+                          }
+                        }
+                      })
                     }
                   })
-                }
-              })
+                // }
+              // })
               typeof cb == "function" && cb(that.globalData.userInfo)
             }
           })
@@ -57,6 +71,13 @@ App({
 
     }
   },
+
+  checkInfo:function(){
+    db.collection('user')
+  },
+
+
+
   globalData:{
     userInfo:null,
     id:'',

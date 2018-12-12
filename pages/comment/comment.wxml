@@ -1,0 +1,18 @@
+<!--detail.wxml-->
+<view class="container">
+      <text class="sub-title">评论</text>
+    <block wx:for="{{comment}}" wx:for-index="id">
+       <!-- <text wx:if="{{item.header}}" class="sub-title">我的回答</text>  -->
+          <!-- <navigator url="../answerdetail/detail?id={{item._id}}&uid={{item.uid}}">  -->
+        <view class="news-item" >
+          <view class="news-item-left">
+            <text class="news-item-title">{{item.content}}</text>
+          </view>
+        </view>
+      <!-- </navigator> -->
+    </block>
+    </view> 
+
+<view>
+    <button type="primary" class="load-btn"  bindtap="newcomment"> 新增评论</button>
+</view>

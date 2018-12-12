@@ -1,4 +1,4 @@
-// pages/myloveperson/mylovepersion.js
+// pages/myloveqa/myloveqa.js
 //index.js
 //获取应用实例
 var app = getApp()
@@ -57,16 +57,35 @@ Page({
     //   }
     // })
     const db = wx.cloud.database()
-    db.collection('myloveperson').where({_openid:app.globalData.id}).get({
+    console.log(111)
+    // console.log(app.globalData.id)
+    db.collection('answer').where({ uid: app.globalData.id }).get({
       success(res) {
-        console.log(res)
-        that.setData({
-          //  banner: res.data.top_stories,
-          list: res.data
-        })
+        // console.log(res.data)
+        var a = new Array()
+        var i = 0
+        // console.log(i)
+        // console.log(res.data.length)
+        var len = res.data.length
+        while (i < res.data.length) {
+          db.collection('comment').where({ aid: res.data[i].aid }).get({
+            success(res) {        
+              // if (res.data.length != 0)
+              for(var j=0;j < res.data.length;++j){
+              a.push(res.data[j])
+              }
+              if (i == len || i == len - 1) {
+                // console.log(a)
+                that.setData({
+                  list: a
+                })
+              }
+            }
+          })
+          i++
+        }
       }
     })
-
     this.index = 1
 
   }

@@ -62,6 +62,7 @@ Page({
       { text: '我的回答', url: '../myanswer/myanswer?status=F', icon: '../../images/myanswer.png', tips: '' },
       { text: '关注的问题', url: '../myloveqa/myloveqa', icon: '../../images/myloveqa.png', tips: '' },
       { text: '关注的答主', url: '../myloveperson/myloveperson', icon: '../../images/myloveperson.png', tips: '' },
+      { text: '动态', url: '../mynews/mynews', icon: '../../images/myloveperson.png', tips: '' },
     ]
   },
 

@@ -1,0 +1,9 @@
+<!--pages/writesucc/writesucc.wxml-->
+<view class="group">
+  <block wx:for="{{iconSize}}">
+    <icon type="success" size="{{item}}"/>
+  </block>
+  <view class="text">
+  <text> 成功</text>
+</view>
+</view>
