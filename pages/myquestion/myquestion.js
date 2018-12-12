@@ -26,18 +26,6 @@ Page({
     var date = this.getNextDate()
     var that = this
     that.setData({ loading: true })
-    // wx.request({
-    //   url: 'http://news.at.zhihu.com/api/4/news/before/' + (Number(utils.formatDate(date)) + 1),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   success(res) {
-    //     that.setData({
-    //       loading: false,
-    //       list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
-    //     })
-    //   }
-    // })
   },
 
 
@@ -49,30 +37,18 @@ Page({
   },
   onLoad() {
     let that = this
-    // wx.request({
-    //   url: 'http://news-at.zhihu.com/api/4/news/latest',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   success(res) {
-    //     that.setData({
-    //       banner: res.data.top_stories,
-    //       list: [{ header: '今日问答' }].concat(res.data.stories)
-    //     })
-    //   }
-    // })
     
     // id: app.globalData.id
     // console.log(1111)
      console.log(app.globalData.id)
     // console.log(1111)
     const db = wx.cloud.database()
-    db.collection('question2').where({ uid:app.globalData.id}).get({
+    db.collection('question').where({ uid:app.globalData.id}).orderBy("time","desc").get({
       success(res){
          console.log(res)
        that.setData({
         //  banner: res.data.top_stories,
-         list: { header: '今日问答', data: res.data}
+         list: {data: res.data}
        })
       }
     })

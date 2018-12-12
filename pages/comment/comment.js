@@ -34,8 +34,6 @@ Page({
           that.setData({
             comment: res.data 
           })
-       
-          // db.collection('user').where({_openid:comment})评论者信息
         }
       }
     })

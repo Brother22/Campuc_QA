@@ -44,6 +44,11 @@ fcomment:function(){
       }
     })
     }
+    else {
+      wx.navigateTo({
+        url: '../fsuccr/fsucc'
+      })
+    }
     // db.collection('myloveperson').add({
     //   data:that.data.author
     // })
@@ -83,21 +88,5 @@ fcomment:function(){
 
       }
     })
-      // console.log(that.data.art)
-      // db.collection('user').where({ _openid: options.uid }).get({
-      //   success(res) {
-          
-      //     if(art.type === 0){
-      //     that.setData({
-      //       author: { name: res.data[0].nickName, country: res.data[0].country, province: res.data[0].province, city:                   res.data[0].city, uid: res.data[0]._openid, image:res.data[0].avatarUrl}
-      //     })
-      //   }
-      //   else{
-      //       that.setData({
-      //       author: { name:'匿名', country:'', province:'', city:'', uid:'', image:''}
-      //       })
-      //   }
-      //   }
-      // })
   }
 })

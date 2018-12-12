@@ -22,47 +22,8 @@ App({
           wx.getUserInfo({
             success: function (res) {
               that.globalData.userInfo = res.userInfo
-              // that.globalData.id = res.userInfo._openid
-              const db = wx.cloud.database()
-          
-              // db.collection('user').add({
-              //   // data 字段表示需新增的 JSON 数据
-              //   data: res.userInfo,
-                
-              //   success: function (res) {
-                  // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id                
-                  var l = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + 'wxaa3098e73a66c15b' + '&secret=' + 'bb7061157ae084e80e90e8830f7b9a95' + '&js_code=' + that.globalData.Code + '&grant_type=authorization_code'
-                  wx.request({
-                    url: l,
-                    data: {},
-                    method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
-                    // header: {}, // 设置请求的 header  
-                    success: function (res) {
-                      // var obj = {};
-                      // obj.openid = res.data.openid
-                      // obj.expires_in = Date.now() + res.data.expires_in
-                      //console.log(obj);
-                      // wx.setStorageSync('user', obj);//存储openid 
-                      that.globalData.id = res.data.openid
-                      // console.log(234555555555)
-                      console.log(res.data.openid)
-
-                      db.collection('user').where({_openid:res.data.openid}).get({
-                        success(res){
-                          if(res.data.length === 0){
-                            db.collection('user').add({ data: that.globalData.userInfo})
-                          }
-                     else {        
-                            if (res.data[0].nickname === that.globalData.userInfo.nickname && res.data[0].avatarUrl === that.globalData.userInfo.avatarUrl && res.data[0].city === that.globalData.userInfo.city && res.data[0].provice ===     that.globalData.userInfo.provice && res.data[0].country === that.globalData.userInfo.country)
-                             {}
-                            else { db.collection('user').update({ data: that.globalData.userInfo})}
-                          }
-                        }
-                      })
-                    }
-                  })
-                // }
-              // })
+              const db = wx.cloud.database()             
+                that.getOpenid()
               typeof cb == "function" && cb(that.globalData.userInfo)
             }
           })
@@ -71,13 +32,31 @@ App({
 
     }
   },
-
-  checkInfo:function(){
-    db.collection('user')
-  },
-
-
-
+  getOpenid:function(){
+  var that=this
+  const db=wx.cloud.database()
+  var l = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + 'wxaa3098e73a66c15b' + '&secret=' + 'bb7061157ae084e80e90e8830f7b9a95' + '&js_code=' + that.globalData.Code + '&grant_type=authorization_code'
+  wx.request({
+    url: l,
+    data: {},
+    method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+    success: function (res) {
+      that.globalData.id = res.data.openid
+    console.log(that.globalData.id)
+      db.collection('user').where({ _openid: res.data.openid }).get({
+        success(res) {
+          if (res.data.length === 0) {
+            db.collection('user').add({ data: that.globalData.userInfo })
+          }
+          else {
+            if (res.data[0].nickname === that.globalData.userInfo.nickname && res.data[0].avatarUrl === that.globalData.userInfo.avatarUrl && res.data[0].city === that.globalData.userInfo.city && res.data[0].provice === that.globalData.userInfo.provice && res.data[0].country === that.globalData.userInfo.country) { }
+            else { db.collection('user').update({ data: that.globalData.userInfo }) }
+          }
+        }
+      })
+    }
+  })
+},
   globalData:{
     userInfo:null,
     id:'',

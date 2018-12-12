@@ -11,7 +11,8 @@ Page({
     autoplay: true,
     interval: 3000,
     loading: false,
-    plain: false
+    plain: false,
+    arr:[]
   },
   //事件处理函数
   bindViewTap(e) {
@@ -20,20 +21,17 @@ Page({
     })
   },
   loadMore(e) {
-    if (this.data.list.length === 0) return
-    var date = this.getNextDate()
-    var that = this
-    that.setData({ loading: true })
-    wx.request({
-      url: 'http://news.at.zhihu.com/api/4/news/before/' + (Number(utils.formatDate(date)) + 1),
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    const db=wx.cloud.database()
+    var that=this
+    db.collection('comment').where({ aid: db.command.in(that.data.arr) }).orderBy("time", "desc").get({
       success(res) {
-        that.setData({
-          loading: false,
-          list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
-        })
+        console.log("sss" + res.data.length)
+        for (var j = 0; j < res.data.length; ++j) {
+          a.push(res.data[j])
+        }
+          that.setData({
+            list: a
+          })
       }
     })
   },
@@ -44,46 +42,34 @@ Page({
   },
   onLoad() {
     let that = this
-    // wx.request({
-    //   url: 'http://news-at.zhihu.com/api/4/news/latest',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   success(res) {
-    //     that.setData({
-    //       banner: res.data.top_stories,
-    //       list: [{ header: '今日问答' }].concat(res.data.stories)
-    //     })
-    //   }
-    // })
     const db = wx.cloud.database()
     console.log(111)
     // console.log(app.globalData.id)
     db.collection('answer').where({ uid: app.globalData.id }).get({
       success(res) {
-        // console.log(res.data)
+        console.log(res.data)
         var a = new Array()
         var i = 0
         // console.log(i)
         // console.log(res.data.length)
         var len = res.data.length
-        while (i < res.data.length) {
-          db.collection('comment').where({ aid: res.data[i].aid }).get({
+        for(var k=0;k<len;++k){
+          that.data.arr.push(res.data[i].aid)
+        }
+        // while (i < res.data.length) {
+          db.collection('comment').where({ aid:db.command.in(that.data.arr)}).orderBy("time","desc").get({
             success(res) {        
-              // if (res.data.length != 0)
+              console.log("sss"+res.data.length)
               for(var j=0;j < res.data.length;++j){
               a.push(res.data[j])
               }
-              if (i == len || i == len - 1) {
-                // console.log(a)
                 that.setData({
                   list: a
                 })
-              }
             }
           })
-          i++
-        }
+          // i++
+        // }
       }
     })
     this.index = 1

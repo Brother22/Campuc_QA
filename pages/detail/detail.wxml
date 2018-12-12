@@ -27,6 +27,7 @@
 </view>
 
 <view>
-    <button type="primary" class="load-btn"  bindtap="answerquetsion"> 回答 </button>
-     <button type="primary" class="load-btn"  bindtap="fquetsion"> 关注 </button>
+    <button type="primary" class="load-btn"  bindtap="answerquetsion">回答问题</button>
+     <button type="primary" class="load-btn"  bindtap="fquetsion">关注问题</button>
+          <button type="primary" class="load-btn"  bindtap="closequestion">关闭问题</button>
 </view>

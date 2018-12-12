@@ -24,7 +24,7 @@ Page({
     // })
 
     const db = wx.cloud.database()
-    db.collection('question2').get({
+    db.collection('question').get({
       success: function (res) {
            that.setData({
            list: res.data

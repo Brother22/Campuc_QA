@@ -22,17 +22,5 @@ Page({
         })
       }
     })
-
-    // db.collection('answer').where({ uid: Number(options.id) }).get({
-    //   success: function (res) {
-    //     console.log(res.data)
-    //     that.setData({
-    //       artq: res.data
-    //     })
-    //   }
-    // })
-
-
-
   }
 })
