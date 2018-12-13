@@ -1,0 +1,31 @@
+<!--detail.wxml-->
+ <image class="closeq" src="../../images/closequestion.png"  bindtap='closequestion'/>
+ <image class="fanq" src="../../images/{{isfan}}.png" bindtap='fquestion'/>
+<view class="container">
+    <text class="qheader">问题详述</text>
+    <!-- <text class="author">题主</text> -->
+    <text class="authorcontent">       
+作者：{{author.name}} 住址：{{author.country}}-{{author.province}}-{{author.city}}
+       </text>
+    <view class="qcontent">
+      {{question.content}}
+      </view>
+      <text class="aheader">回答</text>
+      <view>
+    <block wx:for="{{answer}}" wx:for-index="id">
+          <navigator url="../answerdetail/detail?id={{item._id}}&uid={{item.uid}}"> 
+        <view class="news-item" >
+          <view class="news-item-left">
+            <text class="acontent">回答：{{item.title}}</text>
+          </view>
+        </view>
+      </navigator>
+    </block>
+    </view>
+</view>
+
+<view>
+    <button type="primary" class="load-btn"  bindtap="answerquetsion">回答问题</button>
+     <!-- <button type="primary" class="load-btn"  bindtap="fquetsion">关注问题</button> -->
+          <!-- <button type="primary" class="load-btn"  bindtap="closequestion">关闭问题</button> -->
+</view>

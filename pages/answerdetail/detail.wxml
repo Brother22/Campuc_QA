@@ -1,0 +1,16 @@
+<!--detail.wxml-->
+<view class="container">
+    <!-- <view class="art-header">
+        <view class="art-title">{{art.id}}</view>
+        <view class="art-source">{{art.content}}</view>
+    </view> -->
+    <text class="qheader">回答详述</text>
+        <text class="authorcontent">       
+作者：{{author.name}} 住址：{{author.country}}-{{author.province}}-{{author.city}}
+       </text>
+ <view class="acontent">
+      {{art.content}}
+      </view>
+     <button type="primary" class="load-btn"  bindtap="fanswer"> 关注答主 </button>
+     <button type="primary" class="load-btn"  bindtap="fcomment"> 查看评论 </button>
+</view>
