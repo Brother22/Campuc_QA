@@ -23,19 +23,20 @@ Page({
     if (this.data.list.length === 0) return
     var date = this.getNextDate()
     var that = this
-    that.setData({ loading: true })
-    wx.request({
-      url: 'http://news.at.zhihu.com/api/4/news/before/' + (Number(utils.formatDate(date)) + 1),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success(res) {
-        that.setData({
-          loading: false,
-          list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
-        })
-      }
-    })
+    // that.setData({ loading: true })
+    // wx.request({
+    //   url: 'http://news.at.zhihu.com/api/4/news/before/' + (Number(utils.formatDate(date)) + 1),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   success(res) {
+    //     that.setData({
+    //       loading: false,
+    //       list: that.data.list.concat([{ header: utils.formatDate(date, '-') }]).concat(res.data.stories)
+    //     })
+    //   }
+    // })
+    
   },
   getNextDate() {
     const now = new Date()

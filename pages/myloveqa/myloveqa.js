@@ -11,7 +11,8 @@ Page({
     autoplay: true,
     interval: 3000,
     loading: false,
-    plain: false
+    plain: false,
+    arr:[]
   },
   //事件处理函数
   bindViewTap(e) {
@@ -44,21 +45,9 @@ Page({
   },
   onLoad() {
     let that = this
-    // wx.request({
-    //   url: 'http://news-at.zhihu.com/api/4/news/latest',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   success(res) {
-    //     that.setData({
-    //       banner: res.data.top_stories,
-    //       list: [{ header: '今日问答' }].concat(res.data.stories)
-    //     })
-    //   }
-    // })
     const db = wx.cloud.database()
     console.log(111)
-    db.collection('mylovequestion').where({ uid: app.globalData.id }).orderBy("time", "desc").get({
+    db.collection('mylovequestion').where({ uid: app.globalData.id }).get({
       success(res) {
         // console.log(res.data)      
         var a = new Array()  
@@ -66,20 +55,17 @@ Page({
             // console.log(i)
           // console.log(res.data[0].qid)
         var len = res.data.length
-          while(i < res.data.length){
-          db.collection('question').where({_id:res.data[i].qid}).get({
+        for (var k = 0; k < len; ++k) {
+          that.data.arr.push(res.data[k].qid)
+        } 
+          db.collection('question').where({_id:db.command.in(that.data.arr)}).orderBy("time","desc").get({
             success(res){
-              console.log(res.data[0])
-              a.push(res.data[0])
                 that.setData({
-                  list:a
+                  list:res.data
                 })}  
           })
-            i++
-          }   
-      }
+          }     
     })
     this.index = 1
-
   }
 })

@@ -21,8 +21,11 @@ Page({
         time: util.formatTime(new Date())
       },
       success(res) {
-        wx.navigateTo({
-          url: '../fsucc/fsucc'
+        wx.showToast({
+          title: '评论成功',
+          icon: 'success',
+          duration: 1000,
+          mask: true
         })
       }
     })

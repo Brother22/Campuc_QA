@@ -14,7 +14,7 @@ Page({
 fcomment:function(){
   var that=this
   wx.navigateTo({
-    url: '../comment/comment?aid=' + that.data.art.aid + '&uid=' + that.data.art.uid
+    url: '../comment/comment?aid=' + that.data.art._id + '&uid=' + that.data.art.uid
   })
 },
 
@@ -24,7 +24,7 @@ fcomment:function(){
     var I = true
     const db = wx.cloud.database()
     if(that.data.art.type === 0){
-      console.log(2222222222222222)
+      // console.log(2222222222222222)
       console.log(app.globalData.id)
     db.collection('myloveperson').where({uid:that.data.author.uid}).get({
       success(res){
@@ -41,35 +41,41 @@ fcomment:function(){
           db.collection('myloveperson').add({
             data: that.data.author,
             success(res) {
-              wx.navigateTo({
-                url: '../fsucc/fsucc'
+              wx.showToast({
+                title: '关注成功',
+                icon: 'success',
+                duration: 1000,
+                mask: true
               })
             }
           })
           }
           else{
-          wx.navigateTo({
-            url: '../fsuccr/fsucc'
+          wx.showToast({
+            title: '已在关注列表中',
+            icon: 'loading',
+            duration: 1000,
+            mask: true
           })
           }
       }
     })
     }
     else {
-      wx.navigateTo({
-        url: '../fsuccr/fsucc'
+      wx.showToast({
+        title: '无法关注',
+        icon: 'loading',
+        duration: 1000,
+        mask: true
       })
     }
-    // db.collection('myloveperson').add({
-    //   data:that.data.author
-    // })
   },
 
   onLoad(options) {
     var that = this
     const db = wx.cloud.database()
     // console.log("123"+options.id)
-    db.collection('answer').where({ aid: options.id }).get({
+    db.collection('answer_brief').where({ _id: options.id }).get({
       success: function (res) {
         // console.log(art)
         // console.log(res.data)
@@ -80,8 +86,7 @@ fcomment:function(){
           if(res.data[0].type === 1) {
             that.setData({
               author: { name: '匿名', country: '', province: '', city: '', uid: '', image: '' }
-            })
-            
+            }) 
           }
           else{
             db.collection('user').where({ _openid: options.uid }).get({
@@ -92,11 +97,6 @@ fcomment:function(){
               }
               })
           }
-
-
-
-
-
       }
     })
   }

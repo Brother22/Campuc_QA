@@ -84,31 +84,27 @@ Page({
     const db = wx.cloud.database()
     console.log(111)
     // console.log(app.globalData.id)
-    db.collection('answer').where({ uid: app.globalData.id }).get({
+    db.collection('answer_brief').where({ uid: app.globalData.id }).get({
       success(res) {
-        console.log(res.data)
+        // console.log(res.data)
         var a = new Array()
         var i = 0
         // console.log(i)
-        // console.log(res.data.length)
+        console.log(res.data)
         var len = res.data.length
         for (var k = 0; k < len; ++k) {
-          that.data.arr.push(res.data[i].aid)
+          that.data.arr.push(res.data[k]._id)
         }
+        console.log(that.data.arr)
         // while (i < res.data.length) {
         db.collection('comment').where({aid: db.command.in(that.data.arr) }).orderBy("time", "desc").get({
           success(res) {
-            console.log("sss" + res.data.length)
-            for (var j = 0; j < res.data.length; ++j) {
-              a.push(res.data[j])
-            }
+            console.log(res.data)
             that.setData({
-              list: a
+              list: res.data
             })
           }
         })
-        // i++
-        // }
       }
     })
   }

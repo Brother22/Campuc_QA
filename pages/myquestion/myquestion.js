@@ -7,6 +7,7 @@ var utils = require('../../utils/util.js')
 Page({
   data: {
     list: [],
+    intdex:1,
     duration: 2000,
     indicatorDots: true,
     autoplay: true,
@@ -25,7 +26,8 @@ Page({
     var that = this
     // that.setData({ loading: true })
     const db = wx.cloud.database()
-    db.collection('question').where({ uid: app.globalData.id }).orderBy("time", "desc").limit(1).get({
+    that.data.index+=1
+    db.collection('question').where({ uid: app.globalData.id }).orderBy("time", "desc").limit(that.data.index*4).get({
       success(res) {
         console.log(res)
         that.setData({
@@ -34,7 +36,7 @@ Page({
           },
         //  loading:false
         })
-        wx.showToast({title:"刷新成功",icon:"success"})
+        wx.showToast({title:"加载成功",icon:"success"})
       }
     })
     // that.setData({ loading:false})
@@ -49,17 +51,13 @@ Page({
   },
   onLoad() {
     let that = this
-    
-    // id: app.globalData.id
-    // console.log(1111)
      console.log(app.globalData.id)
     // console.log(1111)
     const db = wx.cloud.database()
-    db.collection('question').where({ uid:app.globalData.id}).orderBy("time","desc").get({
+    db.collection('question').where({ uid:app.globalData.id}).orderBy("time","desc").limit(that.data.index*4).get({
       success(res){
          console.log(res)
        that.setData({
-        //  banner: res.data.top_stories,
          list: {data: res.data}
        })
       }

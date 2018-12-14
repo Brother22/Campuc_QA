@@ -46,10 +46,22 @@ Page({
 
 //页面跳转至answer页
   answerquetsion:function(){
-    console.log(this.data.question.qid)
+    var that = this
+    // console.log(this.data.question.qid)
+    if(that.data.question.close === false){
+      console.log(this.data.question._id)
     wx.navigateTo({
-      url: '../answer/answer?qid='+this.data.question.qid
+      url: '../answer/answer?qid='+this.data.question._id
     })
+    }
+    else{
+      wx.showToast({
+        title: '问题已关闭',
+        icon: 'loading',
+        duration: 1000,
+        mask: true
+      })
+    }
   },
 
   //跳转关注成功页
@@ -73,12 +85,7 @@ Page({
           title: '关注成功',
           icon: 'success',
           duration: 1000,
-          mask: true,
-          success(res){
-            wx.navigateTo({
-          url: '../user/user'
-        })
-          }
+          mask: true
         })
       }
     })
@@ -99,8 +106,6 @@ Page({
       console.log(options.uid)
       that.getUser(options.uid)
     that.getQuestion(options.id)
-   
-      // console.log()
   },
   getUser: function (uid){
     var that=this
@@ -117,8 +122,9 @@ Page({
   getQestiondetail:function(tqid){
     var that = this
     const db = wx.cloud.database()
-    db.collection('qdetail').where({qid: tqid }).get({
+    db.collection('question').where({_id: tqid }).get({
       success: function (res) {
+        console.log(res.data)
         that.setData({
           question: res.data[0]
         })
@@ -131,7 +137,7 @@ Page({
     const db=wx.cloud.database()
     db.collection('answer_brief').where({qid: tqid }).get({
       success: function (res) {
-        // console.log(1111)
+        console.log(1111)
         console.log(res.data)
         // if (res.data[0] != undefined){
         if (res.data.length === 0) {
@@ -200,7 +206,7 @@ Page({
   fanfunction:function(){
     var that = this
     const db = wx.cloud.database()
-    db.collection('mylovequestion').where({ qid: that.data.question.qid }).get({
+    db.collection('mylovequestion').where({ qid: that.data.question._id }).get({
       success(res) { 
         if (res.data.length === 0) {
           that.setData({
