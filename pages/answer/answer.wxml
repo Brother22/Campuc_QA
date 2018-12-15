@@ -6,7 +6,7 @@
     <checkbox-group  bindchange="niming">
     <checkbox  name="hidden">匿名</checkbox>
     </checkbox-group>
-    <button form-type="submit"> 提交 </button>
+    <button form-type="submit"  class="load-btn"  loading="{{loading}}" plain="{{plain}}"> 提交 </button>
   </form>
   
     <!-- <form bindsubmit="bindFormSubmit2">

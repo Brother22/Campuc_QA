@@ -26,6 +26,12 @@ Page({
     const db = wx.cloud.database()
     // console.log(that.data.art.qid)
     // that.checkQuestion(e)
+    wx.showToast({
+      title: '提交中',
+      icon: 'loading',
+      duration: 1000,
+      mask: true
+    })
     db.collection("answer_brief").add({
       data: {
         title: e.detail.value.textarea1,
@@ -36,7 +42,7 @@ Page({
         content: e.detail.value.textarea2
       },
       success(res) {
-        console.log(res)
+        // console.log(res)
         that.updatefunction({ union: "question", value: 1, qid: that.data.art.qid})
         wx.showToast({
           title: '回答成功',
@@ -121,7 +127,7 @@ Page({
     //     })
     //   }
     // })
-            that.setData({
+        that.setData({
           art: options
         })
   },

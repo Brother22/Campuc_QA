@@ -7,9 +7,17 @@ Page({
     height: 20,
     focus: false,
     nextid:0,
-    param:{}
+    param:{},
+    // que:{
+    //   title:'',
+    //   uid :'',
+    //   image :'11111',
+    //   close :false,
+    //   time :util.formatTime(new Date()),
+    //   isanswer : 0,
+    //   content :''
+    // }
   },
-
   bindButtonTap: function () {
     this.setData({
       focus: true
@@ -23,33 +31,49 @@ Page({
 
 
   bindFormSubmit: function (e) {
-    var that = this
-    const db = wx.cloud.database()
-    
-       db.collection("question").add({
-        data: {
-              title: e.detail.value.textarea1,
-              uid: app.globalData.id,
-              image: '1111111',
-              close:false,
-              time: util.formatTime(new Date()),
-              isanswer:0,
-              content: e.detail.value.textarea2
-            },
-            success(res){
-              wx.showToast({
-                        title: '发布成功',
-                        icon: 'success',
+    console.log(33333)
+    wx.showToast({
+                        title: '提交中',
+                        icon: 'loading',
                         duration: 1000,
                         mask: true,
                       })
+    var that = this
+        that.data.param.title=e.detail.value.textarea1,
+        that.data.param.uid=app.globalData.id,
+        that.data.param.image='1111111',
+        that.data.param.close=false,
+        that.data.param.time=util.formatTime(new Date()),
+        that.data.param.isanswer=0,
+        that.data.param.content=e.detail.value.textarea2
+        that.writeqfunction(that.data.param)
+    // console.log(that.data.param)
+    // const db = wx.cloud.database()
+    
+    //    db.collection("question").add({
+    //     data: {
+    //           title: e.detail.value.textarea1,
+    //           uid: app.globalData.id,
+    //           image: '1111111',
+    //           close:false,
+    //           time: util.formatTime(new Date()),
+    //           isanswer:0,
+    //           content: e.detail.value.textarea2
+    //         },
+    //         success(res){
+    //           wx.showToast({
+    //                     title: '发布成功',
+    //                     icon: 'success',
+    //                     duration: 1000,
+    //                     mask: true,
+    //                   })
              
-            },
-         fail(res){
-           console.log(err)
-         }
+    //         },
+    //      fail(res){
+    //        console.log(err)
+    //      }
 
-       })
+    //    })
     // db.collection("question").where({ title: e.detail.value.textarea1}).get({
     //   success(res){
     //     if(res.data.length === 0){
@@ -141,4 +165,27 @@ Page({
 // }
 // })
 // }
+writeqfunction(e){
+  wx.cloud.init()
+  wx.cloud.callFunction({
+    name:'addquestion',
+    data:e,
+    success(res) {
+      console.log(2222)
+      console.log(res.result)
+      console.log(2222)
+      wx.showToast({
+        title: '提交成功',
+        icon: 'success',
+        duration: 1000,
+        mask: true,
+      })
+    },
+    fail(res) {
+      // console.log(e)
+        // console.log(res)
+    }
+  })
+}
+
 })

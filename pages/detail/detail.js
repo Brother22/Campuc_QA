@@ -21,7 +21,8 @@ Page({
         content: '问题关闭确认',
         success(res) {
           if (res.confirm) {
-            that.updatefunction({ qid: that.data.question.qid, union: "question", close: true })
+            console.log(that.data.question._id)
+            that.updatefunction({ qid: that.data.question._id, union: "question", close: true })
           } 
         }
       })    
@@ -66,16 +67,14 @@ Page({
 
   //跳转关注成功页
   fquestion: function () {
-    console.log(this.data.question.qid)
+    console.log(this.data.question._id)
     var that=this
     const db = wx.cloud.database()
-    
-        if(that.data.isfan==="faning"){
-          
+      if(that.data.isfan==="faning"){
           db.collection('mylovequestion').add({
       data:{
         uid:app.globalData.id,
-        qid: that.data.question.qid
+        qid: that.data.question._id
       },
       success(res){
         that.setData({
@@ -91,8 +90,8 @@ Page({
     })
         }
         else{
-          // console.log("ssssssssssssssssssssss")
-          that.updatefanfunction({qid:that.data.question.qid})
+           console.log("ssssssssssssssssssssss")
+          that.updatefanfunction({qid:that.data.question._id})
           that.setData({
             isfan:"faning"
           })
@@ -124,7 +123,9 @@ Page({
     const db = wx.cloud.database()
     db.collection('question').where({_id: tqid }).get({
       success: function (res) {
+        console.log(444444444)
         console.log(res.data)
+        console.log(444444444)
         that.setData({
           question: res.data[0]
         })
