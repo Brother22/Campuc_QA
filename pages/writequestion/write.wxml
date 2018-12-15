@@ -5,6 +5,6 @@
     <textarea placeholder="详细描述" name="textarea2"/>
     <button form-type="submit"> 提问 </button>
   </form>
-    <button form-type="submit" bindtap='test'> test </button>
+    <!-- <button form-type="submit" bindtap='test'> test </button> -->
 
 </view>
