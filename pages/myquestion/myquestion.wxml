@@ -17,9 +17,9 @@
           <view class="news-item-left">
             <text class="news-item-title">{{item.title}}</text>
           </view>
-          <!-- <view class="news-item-right">
+          <view class="news-item-right">
             <image src="{{item.images[0]}}" class="news-image"/>
-          </view> -->
+          </view>
         </view>
       </navigator>
   </block>

@@ -52,3 +52,14 @@
     left: 30px;
     font-size: 15px;
 }
+
+.closea{
+    width: 30px;
+    height: 30px;
+}
+.fana{
+    margin-left: 80%;
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+}

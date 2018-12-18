@@ -34,21 +34,19 @@ Page({
           list: { 
             data: res.data ,
           },
-        //  loading:false
         })
         wx.showToast({title:"加载成功",icon:"success"})
       }
     })
-    // that.setData({ loading:false})
   },
 
 
 
-  getNextDate() {
-    const now = new Date()
-    now.setDate(now.getDate() - this.index++)
-    return now
-  },
+  // getNextDate() {
+  //   const now = new Date()
+  //   now.setDate(now.getDate() - this.index++)
+  //   return now
+  // },
   onLoad() {
     let that = this
      console.log(app.globalData.id)

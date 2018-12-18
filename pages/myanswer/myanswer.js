@@ -20,16 +20,20 @@ Page({
     })
   },
   loadMore(e) {
-    if (this.data.list.length === 0) return
-    var date = this.getNextDate()
-    var that = this
-    that.setData({ loading: true })
+    const db=wx.cloud.database()
+    db.collection('answer_brief').where({ uid: app.globalData.id }).orderBy("time", "desc").get({
+      success(res) {
+        that.setData({
+          list: res.data
+        })
+      }
+    })
   },
-  getNextDate() {
-    const now = new Date()
-    now.setDate(now.getDate() - this.index++)
-    return now
-  },
+  // getNextDate() {
+  //   const now = new Date()
+  //   now.setDate(now.getDate() - this.index++)
+  //   return now
+  // },
   onLoad() {
     let that = this
     const db = wx.cloud.database()
@@ -40,6 +44,7 @@ Page({
                 that.setData({
                   list: res.data
                 })
+        wx.showToast({ title: "加载成功", icon: "success" })
       }
     })
     this.index = 1

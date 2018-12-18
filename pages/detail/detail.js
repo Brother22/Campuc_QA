@@ -4,18 +4,36 @@ Page({
     question:{},
       answer:{},
       author:{},
-      isfan:'faning'
+      isfan:'faning',
+      admin:"true",
+      close:"",
+      user:false
   },
   onReady () {
     wx.setNavigationBarTitle({
       title: '详情页面'
     })
   },
+  deleteq:function(){
+    var that=this
+    // console.log(admin + "admin")
+    wx.showModal({
+      title: '提示',
+      content: '问题删除确认',
+      success(res) {
+        if (res.confirm) {
+          console.log(that.data.question._id)
+          that.removeq({ qid: that.data.question._id, union:'question' })
+        }
+      }
+    })
+  },
   closequestion:function(){
     var that=this
     const db=wx.cloud.database()
-
-    if (that.checkauthority()){
+    console.log(that.data.user)
+    if (that.data.admin=="" || that.data.user){
+      
       wx.showModal({
         title: '提示',
         content: '问题关闭确认',
@@ -38,34 +56,46 @@ Page({
 
   checkauthority:function(){
     var that = this
-    if(app.globalData.id === that.data.question.uid)
+    const db=wx.cloud.database()
+    db.collection('admin').where({ mid: app.globalData.id }).get({
+      success(res) {
+        console.log(res.data.length)
+        if (res.data.length == 0) {
+          that.setData({
+            admin: 'true'
+          })
+        }
+        else {
+          that.setData({
+            admin: ''
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+    console.log(app.globalData.id)
+    console.log(that.data.question.uid)
+    if(app.globalData.id == that.data.question.uid)
     {
-      return true
+      that.setData({
+        user:true
+      })
     }
-    return false
+    else{that.setData({
+      user: false
+    })}
   },
 
-//页面跳转至answer页
   answerquetsion:function(){
     var that = this
-    // console.log(this.data.question.qid)
-    if(that.data.question.close === false){
       console.log(this.data.question._id)
     wx.navigateTo({
       url: '../answer/answer?qid='+this.data.question._id
     })
-    }
-    else{
-      wx.showToast({
-        title: '问题已关闭',
-        icon: 'loading',
-        duration: 1000,
-        mask: true
-      })
-    }
   },
 
-  //跳转关注成功页
   fquestion: function () {
     console.log(this.data.question._id)
     var that=this
@@ -96,8 +126,6 @@ Page({
             isfan:"faning"
           })
         }
-      // }
-    // })
   },
   onLoad (options) {
     var that=this
@@ -121,7 +149,7 @@ Page({
   getQestiondetail:function(tqid){
     var that = this
     const db = wx.cloud.database()
-    db.collection('question').where({_id: tqid }).get({
+    db.collection('question').where({_id:tqid }).get({
       success: function (res) {
         console.log(444444444)
         console.log(res.data)
@@ -130,6 +158,11 @@ Page({
           question: res.data[0]
         })
         that.fanfunction()
+        if (that.data.question.close === true) {
+            that.setData({
+              close:"disabled"
+            })
+        }
       }
     })
   },
@@ -140,6 +173,7 @@ Page({
       success: function (res) {
         console.log(1111)
         console.log(res.data)
+        that.checkauthority()
         // if (res.data[0] != undefined){
         if (res.data.length === 0) {
           that.setData({
@@ -186,17 +220,11 @@ Page({
       name: 'updatefan',
       data: e,
       success(res) {
-        console.log(res.result)
         wx.showToast({
           title: '取关成功',
           icon: 'success',
           duration: 1000,
           mask: true,
-          success(res) {
-            wx.navigateTo({
-              url: '../user/user'
-            })
-          }
         })
       },
       fail(res) {
@@ -219,11 +247,26 @@ Page({
           that.setData({
             isfan:"faned"
           })
-          
-          // wx.navigateTo({
-          //   url: '../fsuccr/fsucc'
-          // })
         }
+      }
+    })
+  },
+  removeq(e){
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name: 'removequestion',
+      data: e,
+      success(res) {
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success',
+          duration: 1000,
+          mask: true,
+        })
+        console.log(res)
+      },
+      fail(res) {
+        console.log(res)
       }
     })
   }

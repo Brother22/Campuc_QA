@@ -15,6 +15,18 @@ Page({
     Index:1,
     imagepath:'../../images/question'
   },
+  onPullDownRefresh() {
+    var that=this
+    wx.showNavigationBarLoading(
+      {
+        success(res){
+          wx.stopPullDownRefresh()
+          wx.hideNavigationBarLoading()
+        }
+      }
+    ) //在标题栏中显示加载
+    that.getQuestionbrief()
+  },
   //事件处理函数
   bindViewTap(e) {
     wx.navigateTo({
@@ -22,15 +34,9 @@ Page({
     })
   },
   loadMore (e) {
-    // if (this.data.list.length === 0) return
     var that = this
     that.data.Index +=1
     that.getQuestionbrief()
-  },
-  getNextDate (){
-    const now = new Date()
-    now.setDate(now.getDate() - this.index++)
-    return now
   },
   onLoad () {
     let that = this
@@ -42,7 +48,6 @@ Page({
     var that=this
     db.collection('question').where({close:false}).orderBy("time", "desc").limit(4*that.data.Index).get({
       success(res) {
-        // console.log(res.data)
         that.setData({
           list: res.data
         })
@@ -50,20 +55,4 @@ Page({
       }
     })
   },
-  // testfunction:function(e){
-  //   wx.cloud.init()
-  //   wx.cloud.callFunction({
-  //     name: 'update',
-  //     data: {
-  //       title: '问题十用户二',
-  //       qid:e
-  //     },
-  //     success(res) {
-  //       console.log(res)
-  //     },
-  //     fail(res) {
-  //        console.log(res)
-  //     }
-  //   })
-  // }
 })
