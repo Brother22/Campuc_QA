@@ -98,7 +98,17 @@ fcomment:function(){
           })
           }
           else{
-          that.updatefanfunction({ uid: app.globalData.id, fid: that.data.author.uid})
+          //that.updatefanfunction({ uid: app.globalData.id, fid: that.data.author.uid})
+          db.collection("myloveperson").where({
+              _openid: app.globalData.id
+          }).get({
+            success(res){
+              for(var i=0;i<res.data.length;++i){
+                if (res.data[i].uid == that.data.author.uid)
+                  that.updatefanfunction({id:res.data[i]._id})
+              }
+            }
+          })
           that.setData({
             isfan: "faning"
           })

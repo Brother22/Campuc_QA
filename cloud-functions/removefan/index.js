@@ -6,10 +6,6 @@ exports.main = function (event, context) {
   const db = cloud.database()
   const wxContext = cloud.getWXContext()
   // const _openid = event.userInfo.openId
-  return db.collection("myloveperson").where({
-    stat: db.command.eq({
-    _openid: event.uid,
-    uid: event.fid
-  })}).remove({
+  return db.collection("myloveperson").doc(event.id).remove({
   })
 }

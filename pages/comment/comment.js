@@ -8,18 +8,18 @@ Page({
       title: '详情页面'
     })
   },
-  onPullDownRefresh() {
-    var that = this
-    wx.showNavigationBarLoading(
-      {
-        success(res) {
-          wx.stopPullDownRefresh()
-          wx.hideNavigationBarLoading()
-        }
-      }
-    ) //在标题栏中显示加载
-    that.getQuestionbrief()
-  },
+  // onPullDownRefresh() {
+  //   var that = this
+  //   wx.showNavigationBarLoading(
+  //     {
+  //       success(res) {
+  //         wx.stopPullDownRefresh()
+  //         wx.hideNavigationBarLoading()
+  //       }
+  //     }
+  //   ) //在标题栏中显示加载
+  //   that.getQuestionbrief()
+  // },
   newcomment:function(){
     var that=this
     console.log(that.data.comment[0])

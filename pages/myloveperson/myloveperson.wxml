@@ -15,5 +15,5 @@
         </view>
       </navigator>
     </block>
-    <button type="primary" class="load-btn"  loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button>
+    <!-- <button type="primary" class="load-btn"  loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button> -->
   </view>
